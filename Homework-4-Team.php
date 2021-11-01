@@ -21,20 +21,21 @@
    array('name' => 'Employee-6', 'department' => 'Finance', 'salary' => 1500)
   );
   
-  function getTotalSalaries() {
+  /*
+  function getTotalSalaries($employees) {
   $totalSalaries = 0;
-  global $employees; 									// We want to use a global variable from outside the function 
   foreach ($employees as $value) {
 	$totalSalaries += $value['salary'];
   }
   return $totalSalaries;
   }
+  */
+  function getTotalSalaries($employees) {
+	return array_sum(array_column($employees, 'salary'));	// Calculate the sum of the returned values in a single column (salary)
+  }
   
-  function getMaxSalary() {
-  global $employees; 									// We want to use a global variable from outside the function 
-  $maxSalary = max(array_column($employees, 'salary')); // Get the maximum value from the returned values in a single column (salary) in the input array
-  
-  return $maxSalary;
+  function getMaxSalary($employees) {
+	return max(array_column($employees, 'salary'));;	// Get the maximum value from the returned values in a single column (salary) in the input array
   }
   
   ?>
@@ -89,8 +90,8 @@
           </table>
         </div>
         <div class="widget-footer">
-          <button type="button" class="btn btn-warning">Total Salaries <span class="badge bg-danger"><?= getTotalSalaries() ?></span></button>
-          <button type="button" class="btn btn-warning" style="display: inline-block; float: right;">Maximum Salary <span class="badge bg-danger"><?= getMaxSalary() ?></span></button>
+          <button type="button" class="btn btn-warning">Total Salaries <span class="badge bg-danger"><?= getTotalSalaries($employees) ?></span></button>
+          <button type="button" class="btn btn-warning" style="display: inline-block; float: right;">Maximum Salary <span class="badge bg-danger"><?= getMaxSalary($employees) ?></span></button>
         </div>
       </div>
     </div>
